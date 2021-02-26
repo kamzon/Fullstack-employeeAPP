@@ -9,7 +9,7 @@ export class Navigation extends Component{
 
     render(){
         return(
-            <Navbar bg="dark" expend="lg">
+            <Navbar className = "m-5 d-flex justify-content-left" bg="dark" expend="lg">
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 
