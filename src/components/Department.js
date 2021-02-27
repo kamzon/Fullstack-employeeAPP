@@ -26,6 +26,10 @@ export class Department extends Component{
         });
     }
 
+    componentDidUpdate(){
+        this.refreshList();
+    }
+
     render(){
 
         const {deps} = this.state;
