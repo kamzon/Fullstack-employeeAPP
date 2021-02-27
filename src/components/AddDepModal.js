@@ -57,7 +57,7 @@ export class AddDepModal extends Component{
                             <Form.Label>DepartmentName</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="DepartmentNaùme"
+                                name="DepartmentName"
                                 required
                                 placeholder="DepartmentName"
                             />

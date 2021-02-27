@@ -2,13 +2,16 @@ import react,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from "react-bootstrap";
 
+import {Button, ButtonToolbar } from "react-bootstrap";
+import {AddEmpModal} from "./AddEmpModal";
+
 
 
 export class Employee extends Component{
 
     constructor(props){
         super(props);
-        this.state={deps:[]}
+        this.state={deps:[], addModalShow : false}
     }
 
     componentDidMount(){
@@ -24,11 +27,17 @@ export class Employee extends Component{
         });
     }
 
+    componentDidUpdate(){
+        this.refreshList();
+    }
+
 
     render(){
         const {deps} = this.state;
+        let addModelClose = () => this.setState({addModalShow:false});
 
         return(
+            <div>
             <Table className="m-5" striped bordred hover size="sm">
                 <thead>
                     <tr>
@@ -51,7 +60,18 @@ export class Employee extends Component{
                         )}
                 </tbody>
             </Table>
-            
+
+            <ButtonToolbar>
+                <Button className="m-5" variant="primary"
+                onClick={()=> this.setState({addModalShow:true})}
+                > Add Employee</Button>
+
+                <AddEmpModal
+                show={this.state.addModalShow}
+                onHide={addModelClose}
+                />
+            </ButtonToolbar>
+            </div>  
         )
     }
 }
