@@ -4,13 +4,14 @@ import { Table } from "react-bootstrap";
 
 import {Button, ButtonToolbar } from "react-bootstrap";
 import {AddDepModal} from "./AddDepModal";
+import {EditDepModal} from "./EditDepModal";
 
 
 export class Department extends Component{
 
     constructor(props){
         super(props);
-        this.state={deps:[], addModalShow : false}
+        this.state={deps:[], addModalShow : false, editModalShow : false}
     }
 
     componentDidMount(){
@@ -32,8 +33,10 @@ export class Department extends Component{
 
     render(){
 
-        const {deps} = this.state;
+        const {deps, depid, depname} = this.state;
         let addModelClose = () => this.setState({addModalShow:false});
+
+        let editModelClose = () => this.setState({editModalShow:false});
 
         return(
             <div>
@@ -42,6 +45,7 @@ export class Department extends Component{
                     <tr>
                         <th>DepartmentID</th>
                         <th>DepartmentName</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +53,21 @@ export class Department extends Component{
                         <tr key = {dep.DepartmentID}> 
                             <td>{dep.DepartmentID}</td>
                             <td>{dep.DepartmentName}</td>
+                            <td>
+                            <ButtonToolbar>
+                                <Button className="mr-5" variant="info"
+                                onClick={()=> this.setState({editModalShow:true,depid:dep.DepartmentID,depname:dep.DepartmentName})}
+                                > Edit</Button>
+
+                                <EditDepModal
+                                show={this.state.editModalShow}
+                                onHide={editModelClose}
+                                depid = {depid}
+                                depname = {depname}
+                                />
+                            </ButtonToolbar>
+
+                            </td>
                         </tr>
                         )}
                 </tbody>
